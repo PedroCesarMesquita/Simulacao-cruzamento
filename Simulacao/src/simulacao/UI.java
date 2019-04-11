@@ -28,9 +28,10 @@ public class UI extends JPanel {
     
     @Override
     public void paintComponent(Graphics graphics) {
-        this.g = graphics;
+        g = graphics;
         
         super.paintComponent(g);
+        
         g.setClip(0, 0, 800, 800);
 
         g.setColor(new Color(0, 122, 0));
@@ -83,9 +84,5 @@ public class UI extends JPanel {
         g.fillRect(x, y, w, h);
         g.setColor(Color.black);
         g.drawRect(x, y, w, h);
-    }
-    
-    public void update() {
-        paintComponent(g);
     }
 }
