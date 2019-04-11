@@ -12,16 +12,6 @@ public class Simulacao {
             carros[i] = new Carro(i);
         }
         UI ui = new UI(carros);
-        /*
-        Timer timer = new Timer();        
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                carros[0].drive();
-            }
-        };
-        
-        timer.schedule(task, 0L, 20L);*/
         
         f.setSize(800, 800);
         f.add(ui);
