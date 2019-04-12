@@ -8,14 +8,24 @@ import javax.swing.JPanel;
 
 public class UI extends JPanel {
     private Carro[] carros;
+    private Semaforo[] semaforos;
     private Graphics g;
     
     public UI() {
-        this(null);
+        this(null, null);
     }
     
     public UI(Carro[] carros) {
+        this(carros, null);
+    }
+    
+    public UI(Semaforo[] semaforos) {
+        this(null, semaforos);
+    }
+    
+    public UI(Carro[] carros, Semaforo[] semaforos) {
         this.carros = carros;
+        this.semaforos = semaforos;
     }
     
     public Carro[] getCarros() {
@@ -24,6 +34,14 @@ public class UI extends JPanel {
     
     public void setCarros(Carro[] carros) {
         this.carros = carros;
+    }
+    
+    public Semaforo[] getSemaforos() {
+        return this.semaforos;
+    }
+    
+    public void setSemaforos(Semaforo[] semaforos) {
+        this.semaforos = semaforos;
     }
     
     @Override
@@ -51,8 +69,12 @@ public class UI extends JPanel {
         g.drawLine(350, 450, 350, 800);
         g.drawLine(450, 450, 450, 800);
         
-        for(int i = 0; i < carros.length; i++) {
-            desenhaCarro(carros[i]);
+        for(Carro carro : carros) {
+            desenhaCarro(carro);
+        }
+        
+        for(Semaforo semaforo : semaforos) {
+            desenhaSemaforo(semaforo);
         }
         
         JPanel that = this;
@@ -64,7 +86,7 @@ public class UI extends JPanel {
             }
         };
         
-        timer.schedule(task, 0L, 20L);
+        timer.schedule(task, 0L, 50L);
     }
     
     public void desenhaCarro(Carro carro) {
@@ -81,6 +103,25 @@ public class UI extends JPanel {
             h = Carro.COMPRIMENTO;
         }
         g.setColor(carro.getCor());
+        g.fillRect(x, y, w, h);
+        g.setColor(Color.black);
+        g.drawRect(x, y, w, h);
+    }
+    
+    public void desenhaSemaforo(Semaforo semaforo) {
+        int x, y, w, h;
+        if(semaforo.getSentido() % 2 == 0) {
+            x = semaforo.getX() - Semaforo.LARGURA / 2;
+            y = semaforo.getY() - Semaforo.COMPRIMENTO / 2;
+            w = Semaforo.LARGURA;
+            h = Semaforo.COMPRIMENTO;
+        } else {
+            x = semaforo.getX() - Semaforo.COMPRIMENTO / 2;
+            y = semaforo.getY() - Semaforo.LARGURA / 2;
+            w = Semaforo.COMPRIMENTO;
+            h = Semaforo.LARGURA;
+        }
+        g.setColor(semaforo.getEstado() ? Color.green : Color.red);
         g.fillRect(x, y, w, h);
         g.setColor(Color.black);
         g.drawRect(x, y, w, h);
