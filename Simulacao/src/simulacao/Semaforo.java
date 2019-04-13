@@ -22,24 +22,8 @@ public class Semaforo {
     public Semaforo(int sentido, boolean estado) {
         this.estado = estado;
         this.sentido = sentido;
-         switch(this.sentido) {
-            case SENTIDO_DIREITA:
-                x = 350 - LARGURA / 2;
-                y = 450 - COMPRIMENTO / 4;
-                break;
-            case SENTIDO_CIMA:
-                x = 450 - COMPRIMENTO / 4;
-                y = 450 + LARGURA / 2;
-                break;
-            case SENTIDO_ESQUERDA:
-                x = 450 + LARGURA / 2;
-                y = 350 + COMPRIMENTO / 4;
-                break;
-            case SENTIDO_BAIXO:
-                x = 350 + COMPRIMENTO / 4;
-                y = 350 - LARGURA / 2;
-                break;
-        }
+        x = (sentido == 0 || sentido == 3 ? 350 : 450) + (sentido % 2 == 0 ? LARGURA / 2 : COMPRIMENTO / 4) * (sentido < 2 ? -1 : 1);
+        y = (sentido > 1 ? 350 : 450) + (sentido % 2 == 1 ? LARGURA / 2 : COMPRIMENTO / 4) * (sentido == 0 || sentido == 3 ? -1 : 1);
          
         Timer timerAbre = new Timer();        
         TimerTask abre = new TimerTask() {

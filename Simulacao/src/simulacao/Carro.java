@@ -139,6 +139,8 @@ public class Carro {
             velocidadeY = (int) -Math.sin((double) sentido * Math.PI / 2.0);
             if(virar && x >= 375 && x <= 425 && y >= 375 && y <= 425) {
                 sentido = (sentido + 3) % 4;
+                x += (int)  Math.cos((double) sentido * Math.PI / 2.0) * (COMPRIMENTO - LARGURA);
+                y += (int) -Math.sin((double) sentido * Math.PI / 2.0) * (COMPRIMENTO - LARGURA);
                 virar = false;
             }
         }

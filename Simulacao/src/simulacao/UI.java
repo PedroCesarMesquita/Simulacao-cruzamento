@@ -106,19 +106,19 @@ public class UI extends JPanel {
             g.fillRect(carro.getX() - Carro.COMPRIMENTO / 2, carro.getY() - Carro.LARGURA / 2, Carro.COMPRIMENTO, Carro.LARGURA);
             g.setColor(Color.black);
             g.drawRect(carro.getX() - Carro.COMPRIMENTO / 2, carro.getY() - Carro.LARGURA / 2, Carro.COMPRIMENTO, Carro.LARGURA);
-            g.fillRect(carro.getX() - Carro.COMPRIMENTO / 4 - 4, carro.getY() - Carro.LARGURA / 2 - 1, 8, 1);
+            /*g.fillRect(carro.getX() - Carro.COMPRIMENTO / 4 - 4, carro.getY() - Carro.LARGURA / 2 - 1, 8, 1);
             g.fillRect(carro.getX() + Carro.COMPRIMENTO / 4 - 4, carro.getY() - Carro.LARGURA / 2 - 1, 8, 1);
             g.fillRect(carro.getX() - Carro.COMPRIMENTO / 4 - 4, carro.getY() + Carro.LARGURA / 2 + 1, 8, 1);
-            g.fillRect(carro.getX() + Carro.COMPRIMENTO / 4 - 4, carro.getY() + Carro.LARGURA / 2 + 1, 8, 1);
+            g.fillRect(carro.getX() + Carro.COMPRIMENTO / 4 - 4, carro.getY() + Carro.LARGURA / 2 + 1, 8, 1);*/
         } else {
             g.setColor(carro.getCor());
             g.fillRect(carro.getX() - Carro.LARGURA / 2, carro.getY() - Carro.COMPRIMENTO / 2, Carro.LARGURA, Carro.COMPRIMENTO);
             g.setColor(Color.black);
             g.drawRect(carro.getX() - Carro.LARGURA / 2, carro.getY() - Carro.COMPRIMENTO / 2, Carro.LARGURA, Carro.COMPRIMENTO);
-            g.fillRect(carro.getX() - Carro.LARGURA / 2 - 1, carro.getY() - Carro.COMPRIMENTO / 4 - 4, 1, 8);
+            /*g.fillRect(carro.getX() - Carro.LARGURA / 2 - 1, carro.getY() - Carro.COMPRIMENTO / 4 - 4, 1, 8);
             g.fillRect(carro.getX() + Carro.LARGURA / 2 + 1, carro.getY() - Carro.COMPRIMENTO / 4 - 4, 1, 8);
             g.fillRect(carro.getX() - Carro.LARGURA / 2 - 1, carro.getY() + Carro.COMPRIMENTO / 4 - 4, 1, 8);
-            g.fillRect(carro.getX() + Carro.LARGURA / 2 + 1, carro.getY() + Carro.COMPRIMENTO / 4 - 4, 1, 8);
+            g.fillRect(carro.getX() + Carro.LARGURA / 2 + 1, carro.getY() + Carro.COMPRIMENTO / 4 - 4, 1, 8);*/
         }
     }
     
