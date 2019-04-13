@@ -26,6 +26,18 @@ public class UI extends JPanel {
     public UI(Carro[] carros, Semaforo[] semaforos) {
         this.carros = carros;
         this.semaforos = semaforos;
+        this.g = null;
+        
+        JPanel that = this;
+        Timer timer = new Timer();        
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                that.repaint();
+            }
+        };
+        
+        timer.schedule(task, 0L, 20L);
     }
     
     public Carro[] getCarros() {
@@ -76,17 +88,6 @@ public class UI extends JPanel {
         for(Semaforo semaforo : semaforos) {
             desenhaSemaforo(semaforo);
         }
-        
-        JPanel that = this;
-        Timer timer = new Timer();        
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                that.repaint();
-            }
-        };
-        
-        timer.schedule(task, 0L, 50L);
     }
     
     public void desenhaCarro(Carro carro) {

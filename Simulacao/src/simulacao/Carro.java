@@ -13,7 +13,7 @@ public class Carro {
         new Semaforo(2, true),
         new Semaforo(3, false)
     };
-    private int x, y, sentido, velocidade;
+    private int x, y, sentido, velocidadeX, velocidadeY;
     private boolean virar;
     public static final int COMPRIMENTO = 40, LARGURA = 30;
     public static final int
@@ -48,7 +48,7 @@ public class Carro {
                 y = -COMPRIMENTO / 2;
                 break;
         }
-        velocidade = 3;
+        
         
         timer = new Timer();        
         TimerTask task = new TimerTask() {
@@ -58,7 +58,7 @@ public class Carro {
             }
         };
         
-        timer.schedule(task, 0L, 50L);
+        timer.schedule(task, 0L, 10L);
     }
     
     public static Semaforo[] getSemaforos() {
@@ -111,69 +111,63 @@ public class Carro {
         }
     }
     
-    public int getVelocidade() {
-        return this.velocidade;
+    public int getVelocidadeX() {
+        return this.velocidadeX;
     }
     
-    public void setVelocidade(int velocidade) {
-        this.velocidade = velocidade;
+    public void setVelocidade(int vx) {
+        this.velocidadeX = vx;
+    }
+    
+    public int getVelocidadeY() {
+        return this.velocidadeY;
+    }
+    
+    public void setVelocidadeY(int vy) {
+        this.velocidadeY = vy;
     }
     
     public boolean terminou() {
         if(sentido == SENTIDO_DIREITA && x > 800 + COMPRIMENTO / 2) return true;
         if(sentido == SENTIDO_CIMA && y < -COMPRIMENTO / 2) return true;
         if(sentido == SENTIDO_ESQUERDA && x < -COMPRIMENTO / 2) return true;
-        if(sentido == SENTIDO_BAIXO && y > 800 + COMPRIMENTO / 2) return true;
-        return false;
-    }        
-   
-    
-    public void atualiza() {
-        switch(sentido) {
-            case SENTIDO_DIREITA:
-                if(x > 350 + COMPRIMENTO / 2 && virar) {
-                    virar = false;
-                    x = 350 + COMPRIMENTO / 2;
-                    sentido = SENTIDO_BAIXO;
-                } else if(semaforos[sentido].getEstado() == Semaforo.FECHADO && x > semaforos[sentido].getX() - COMPRIMENTO && x < semaforos[sentido].getX() - COMPRIMENTO / 2) {
-                    velocidade = 0;
-                } else velocidade = 5;
-                x += velocidade; 
-                break;
-            case SENTIDO_CIMA:
-                if(y < 450 - COMPRIMENTO / 2 && virar) {
-                    virar = false;
-                    y = 450 - COMPRIMENTO / 2;
-                    sentido = SENTIDO_DIREITA;
-                } else if(semaforos[sentido].getEstado() == Semaforo.FECHADO && y < semaforos[sentido].getY() + COMPRIMENTO && y > semaforos[sentido].getY() + COMPRIMENTO / 2) {
-                    velocidade = 0;
-                } else velocidade = 5;
-                y -= velocidade; 
-                break;
-            case SENTIDO_ESQUERDA:
-                if(x < 450 - COMPRIMENTO / 2 && virar) {
-                    virar = false;
-                    x = 450 - COMPRIMENTO / 2;
-                    sentido = SENTIDO_CIMA;
-                } else if(semaforos[sentido].getEstado() == Semaforo.FECHADO && x < semaforos[sentido].getX() + COMPRIMENTO && x > semaforos[sentido].getX() + COMPRIMENTO / 2) {
-                    velocidade = 0;
-                } else velocidade = 5;
-                x -= velocidade; 
-                break;
-            case SENTIDO_BAIXO:
-                if(y > 350 + COMPRIMENTO / 2 && virar) {
-                    virar = false;
-                    y = 350 + COMPRIMENTO / 2;
-                    sentido = SENTIDO_ESQUERDA;
-                } else if(semaforos[sentido].getEstado() == Semaforo.FECHADO && y > semaforos[sentido].getY() - COMPRIMENTO && y < semaforos[sentido].getY() - COMPRIMENTO / 2) {
-                    velocidade = 0;
-                } else velocidade = 5;
-                y += velocidade; 
-                break;
-        }
+        return sentido == SENTIDO_BAIXO && y > 800 + COMPRIMENTO / 2;
     }
     
-    public void finaliza() {
+    public void atualiza() {
+        if(verificaSemaforo()) {
+            velocidadeX = (int)  Math.cos((double) sentido * Math.PI / 2.0);
+            velocidadeY = (int) -Math.sin((double) sentido * Math.PI / 2.0);
+            if(virar && x >= 375 && x <= 425 && y >= 375 && y <= 425) {
+                sentido = (sentido + 3) % 4;
+                virar = false;
+            }
+        }
+        else if(velocidadeX != 0 || velocidadeY != 0) {
+            velocidadeX = velocidadeY = 0;
+            semaforos[sentido].setCarrosParados(semaforos[sentido].getCarrosParados() + 1);
+        }
+        x += velocidadeX;
+        y += velocidadeY;
+    }
+
+    public boolean verificaSemaforo() {
+        if(semaforos[sentido].getEstado() == Semaforo.FECHADO) {
+            if(sentido == SENTIDO_DIREITA)
+                return (x >= semaforos[sentido].getX() - COMPRIMENTO / 2) || (x < semaforos[sentido].getX() - (int) (((double) semaforos[sentido].getCarrosParados() * 1.2) * COMPRIMENTO + COMPRIMENTO));
+            if(sentido == SENTIDO_CIMA)
+                return (y <= semaforos[sentido].getY() + COMPRIMENTO / 2) || (y > semaforos[sentido].getY() + (int) (((double) semaforos[sentido].getCarrosParados() * 1.2) * COMPRIMENTO + COMPRIMENTO));
+            if(sentido == SENTIDO_ESQUERDA)
+                return (x <= semaforos[sentido].getX() + COMPRIMENTO / 2) || (x > semaforos[sentido].getX() + (int) (((double) semaforos[sentido].getCarrosParados() * 1.2) * COMPRIMENTO + COMPRIMENTO));
+            return (y >= semaforos[sentido].getY() - COMPRIMENTO / 2) || (y < semaforos[sentido].getY() - (int) (((double) semaforos[sentido].getCarrosParados() * 1.2) * COMPRIMENTO + COMPRIMENTO));
+        }
+        return true;
+    }
+    
+    @Override
+    protected void finalize() {
         timer.cancel();
+        timer = null;
+        cor = null;
     }
 }

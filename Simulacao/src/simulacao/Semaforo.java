@@ -5,7 +5,7 @@ import java.util.TimerTask;
 
 public class Semaforo {
     private boolean estado;
-    private int x, y, sentido;
+    private int x, y, sentido, carrosParados;
     public static final boolean FECHADO = false, ABERTO = true;   
     public static final int COMPRIMENTO = 20, LARGURA = 12;
     public static final int 
@@ -46,6 +46,7 @@ public class Semaforo {
             @Override
             public void run() {
                 setEstado(Semaforo.ABERTO);
+                carrosParados = 0;
             }
         };
         
@@ -64,6 +65,8 @@ public class Semaforo {
             timerAbre.schedule(abre, 6000L, 10000L);
             timerFecha.schedule(fecha, 10000L, 10000L);
         }
+        
+        carrosParados = 0;
     }
     
     public boolean getEstado() {
@@ -98,5 +101,13 @@ public class Semaforo {
         if(sentido >= 0 && sentido < 4) {
             this.sentido = sentido;
         }
+    }
+    
+    public int getCarrosParados() {
+        return this.carrosParados;
+    }
+    
+    public void setCarrosParados(int carrosParados) {
+        this.carrosParados = carrosParados;
     }
 }

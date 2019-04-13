@@ -19,9 +19,9 @@ public class Simulacao {
             public void run() {
                 for(int i = 0; i < carros.length; i++) {
                     if(carros[i].terminou()) {
-                        carros[i].finaliza();
                         carros[i] = new Carro();
                         ui.setCarros(carros);
+                        System.gc();
                     }
                 }
             }
