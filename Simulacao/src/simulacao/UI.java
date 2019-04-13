@@ -82,7 +82,8 @@ public class UI extends JPanel {
         g.drawLine(450, 450, 450, 800);
         
         for(Carro carro : carros) {
-            desenhaCarro(carro);
+            if(carro != null)
+                desenhaCarro(carro);
         }
         
         for(Semaforo semaforo : semaforos) {

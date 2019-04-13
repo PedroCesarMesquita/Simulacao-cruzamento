@@ -154,12 +154,12 @@ public class Carro {
     public boolean verificaSemaforo() {
         if(semaforos[sentido].getEstado() == Semaforo.FECHADO) {
             if(sentido == SENTIDO_DIREITA)
-                return (x >= semaforos[sentido].getX() - COMPRIMENTO / 2) || (x < semaforos[sentido].getX() - (int) (((double) semaforos[sentido].getCarrosParados() * 1.2) * COMPRIMENTO + COMPRIMENTO));
+                return (x >= semaforos[sentido].getX() - COMPRIMENTO / 2) || (x < semaforos[sentido].getX() - (int) (((double) semaforos[sentido].getCarrosParados() * 1.25) * COMPRIMENTO + COMPRIMENTO));
             if(sentido == SENTIDO_CIMA)
-                return (y <= semaforos[sentido].getY() + COMPRIMENTO / 2) || (y > semaforos[sentido].getY() + (int) (((double) semaforos[sentido].getCarrosParados() * 1.2) * COMPRIMENTO + COMPRIMENTO));
+                return (y <= semaforos[sentido].getY() + COMPRIMENTO / 2) || (y > semaforos[sentido].getY() + (int) (((double) semaforos[sentido].getCarrosParados() * 1.25) * COMPRIMENTO + COMPRIMENTO));
             if(sentido == SENTIDO_ESQUERDA)
-                return (x <= semaforos[sentido].getX() + COMPRIMENTO / 2) || (x > semaforos[sentido].getX() + (int) (((double) semaforos[sentido].getCarrosParados() * 1.2) * COMPRIMENTO + COMPRIMENTO));
-            return (y >= semaforos[sentido].getY() - COMPRIMENTO / 2) || (y < semaforos[sentido].getY() - (int) (((double) semaforos[sentido].getCarrosParados() * 1.2) * COMPRIMENTO + COMPRIMENTO));
+                return (x <= semaforos[sentido].getX() + COMPRIMENTO / 2) || (x > semaforos[sentido].getX() + (int) (((double) semaforos[sentido].getCarrosParados() * 1.25) * COMPRIMENTO + COMPRIMENTO));
+            return (y >= semaforos[sentido].getY() - COMPRIMENTO / 2) || (y < semaforos[sentido].getY() - (int) (((double) semaforos[sentido].getCarrosParados() * 1.25) * COMPRIMENTO + COMPRIMENTO));
         }
         return true;
     }
