@@ -71,8 +71,7 @@ public class Carro {
     
     public static Color getCorAleatoria() {
         Color[] cores = {
-            Color.blue, Color.cyan, Color.green, Color.red, Color.magenta,
-            Color.orange, Color.pink, Color.yellow, Color.white, Color.gray
+            Color.white, Color.cyan, Color.blue, Color.darkGray, Color.yellow, Color.pink
         };
         return cores[(int) (Math.random() * cores.length)];
     }

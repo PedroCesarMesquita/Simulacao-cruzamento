@@ -81,6 +81,15 @@ public class UI extends JPanel {
         g.drawLine(350, 450, 350, 800);
         g.drawLine(450, 450, 450, 800);
         
+        g.setColor(Color.yellow);        
+        for(int idx = 15; idx < 800; idx += 60) {
+            if(idx >= 350 && idx < 450) idx = 405;
+            else {
+                g.fillRect(idx, 398, 20, 4);
+                g.fillRect(398, idx, 4, 20);
+            }
+        }
+        
         for(Carro carro : carros) {
             if(carro != null)
                 desenhaCarro(carro);
@@ -92,22 +101,25 @@ public class UI extends JPanel {
     }
     
     public void desenhaCarro(Carro carro) {
-        int x, y, w, h;
         if(carro.getSentido() % 2 == 0) {
-            x = carro.getX() - Carro.COMPRIMENTO / 2;
-            y = carro.getY() - Carro.LARGURA / 2;
-            w = Carro.COMPRIMENTO;
-            h = Carro.LARGURA;
+            g.setColor(carro.getCor());
+            g.fillRect(carro.getX() - Carro.COMPRIMENTO / 2, carro.getY() - Carro.LARGURA / 2, Carro.COMPRIMENTO, Carro.LARGURA);
+            g.setColor(Color.black);
+            g.drawRect(carro.getX() - Carro.COMPRIMENTO / 2, carro.getY() - Carro.LARGURA / 2, Carro.COMPRIMENTO, Carro.LARGURA);
+            g.fillRect(carro.getX() - Carro.COMPRIMENTO / 4 - 4, carro.getY() - Carro.LARGURA / 2 - 1, 8, 1);
+            g.fillRect(carro.getX() + Carro.COMPRIMENTO / 4 - 4, carro.getY() - Carro.LARGURA / 2 - 1, 8, 1);
+            g.fillRect(carro.getX() - Carro.COMPRIMENTO / 4 - 4, carro.getY() + Carro.LARGURA / 2 + 1, 8, 1);
+            g.fillRect(carro.getX() + Carro.COMPRIMENTO / 4 - 4, carro.getY() + Carro.LARGURA / 2 + 1, 8, 1);
         } else {
-            x = carro.getX() - Carro.LARGURA / 2;
-            y = carro.getY() - Carro.COMPRIMENTO / 2;
-            w = Carro.LARGURA;
-            h = Carro.COMPRIMENTO;
+            g.setColor(carro.getCor());
+            g.fillRect(carro.getX() - Carro.LARGURA / 2, carro.getY() - Carro.COMPRIMENTO / 2, Carro.LARGURA, Carro.COMPRIMENTO);
+            g.setColor(Color.black);
+            g.drawRect(carro.getX() - Carro.LARGURA / 2, carro.getY() - Carro.COMPRIMENTO / 2, Carro.LARGURA, Carro.COMPRIMENTO);
+            g.fillRect(carro.getX() - Carro.LARGURA / 2 - 1, carro.getY() - Carro.COMPRIMENTO / 4 - 4, 1, 8);
+            g.fillRect(carro.getX() + Carro.LARGURA / 2 + 1, carro.getY() - Carro.COMPRIMENTO / 4 - 4, 1, 8);
+            g.fillRect(carro.getX() - Carro.LARGURA / 2 - 1, carro.getY() + Carro.COMPRIMENTO / 4 - 4, 1, 8);
+            g.fillRect(carro.getX() + Carro.LARGURA / 2 + 1, carro.getY() + Carro.COMPRIMENTO / 4 - 4, 1, 8);
         }
-        g.setColor(carro.getCor());
-        g.fillRect(x, y, w, h);
-        g.setColor(Color.black);
-        g.drawRect(x, y, w, h);
     }
     
     public void desenhaSemaforo(Semaforo semaforo) {
