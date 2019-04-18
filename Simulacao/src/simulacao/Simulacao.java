@@ -8,7 +8,6 @@ public class Simulacao {
     public static void main(String[] args) {
         JFrame f = new JFrame("Simulação de cruzamento");        
         Carro[] carros = new Carro[20];
-        int numCarros = 0;
         UI ui = new UI(carros, Carro.getSemaforos());
         
         Timer timer = new Timer();        

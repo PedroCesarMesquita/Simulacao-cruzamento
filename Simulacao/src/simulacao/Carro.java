@@ -50,7 +50,7 @@ public class Carro {
         }
         
         
-        timer = new Timer();        
+        timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -71,7 +71,8 @@ public class Carro {
     
     public static Color getCorAleatoria() {
         Color[] cores = {
-            Color.white, Color.cyan, Color.blue, Color.darkGray, Color.yellow, Color.pink
+            Color.white, Color.cyan, Color.blue, Color.gray, Color.yellow,
+            Color.pink, Color.red, Color.green
         };
         return cores[(int) (Math.random() * cores.length)];
     }
@@ -155,12 +156,12 @@ public class Carro {
     public boolean verificaSemaforo() {
         if(semaforos[sentido].getEstado() == Semaforo.FECHADO) {
             if(sentido == SENTIDO_DIREITA)
-                return (x >= semaforos[sentido].getX() - COMPRIMENTO / 2) || (x < semaforos[sentido].getX() - (int) (((double) semaforos[sentido].getCarrosParados() * 1.25) * COMPRIMENTO + COMPRIMENTO));
+                return (x >= semaforos[sentido].getX() - COMPRIMENTO / 2) || (x < semaforos[sentido].getX() - (int) (((double) semaforos[sentido].getCarrosParados() * 1.5) * COMPRIMENTO + COMPRIMENTO));
             if(sentido == SENTIDO_CIMA)
-                return (y <= semaforos[sentido].getY() + COMPRIMENTO / 2) || (y > semaforos[sentido].getY() + (int) (((double) semaforos[sentido].getCarrosParados() * 1.25) * COMPRIMENTO + COMPRIMENTO));
+                return (y <= semaforos[sentido].getY() + COMPRIMENTO / 2) || (y > semaforos[sentido].getY() + (int) (((double) semaforos[sentido].getCarrosParados() * 1.5) * COMPRIMENTO + COMPRIMENTO));
             if(sentido == SENTIDO_ESQUERDA)
-                return (x <= semaforos[sentido].getX() + COMPRIMENTO / 2) || (x > semaforos[sentido].getX() + (int) (((double) semaforos[sentido].getCarrosParados() * 1.25) * COMPRIMENTO + COMPRIMENTO));
-            return (y >= semaforos[sentido].getY() - COMPRIMENTO / 2) || (y < semaforos[sentido].getY() - (int) (((double) semaforos[sentido].getCarrosParados() * 1.25) * COMPRIMENTO + COMPRIMENTO));
+                return (x <= semaforos[sentido].getX() + COMPRIMENTO / 2) || (x > semaforos[sentido].getX() + (int) (((double) semaforos[sentido].getCarrosParados() * 1.5) * COMPRIMENTO + COMPRIMENTO));
+            return (y >= semaforos[sentido].getY() - COMPRIMENTO / 2) || (y < semaforos[sentido].getY() - (int) (((double) semaforos[sentido].getCarrosParados() * 1.5) * COMPRIMENTO + COMPRIMENTO));
         }
         return true;
     }
