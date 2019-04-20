@@ -1,14 +1,14 @@
-package simulacao;
+package simulacaocruzamento;
 
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JFrame;
 
-public class Simulacao {
+public class Main {
     public static void main(String[] args) {
         JFrame f = new JFrame("Simulação de cruzamento");        
         Carro[] carros = new Carro[20];
-        UI ui = new UI(carros, Carro.getSemaforos());
+        GUI ui = new GUI(carros, Carro.getSemaforos());
         
         Timer timer = new Timer();        
         TimerTask task = new TimerTask() {

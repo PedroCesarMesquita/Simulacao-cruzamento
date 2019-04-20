@@ -1,4 +1,4 @@
-package simulacao;
+package simulacaocruzamento;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -6,24 +6,24 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JPanel;
 
-public class UI extends JPanel {
+public class GUI extends JPanel {
     private Carro[] carros;
     private Semaforo[] semaforos;
     private Graphics g;
     
-    public UI() {
+    public GUI() {
         this(null, null);
     }
     
-    public UI(Carro[] carros) {
+    public GUI(Carro[] carros) {
         this(carros, null);
     }
     
-    public UI(Semaforo[] semaforos) {
+    public GUI(Semaforo[] semaforos) {
         this(null, semaforos);
     }
     
-    public UI(Carro[] carros, Semaforo[] semaforos) {
+    public GUI(Carro[] carros, Semaforo[] semaforos) {
         this.carros = carros;
         this.semaforos = semaforos;
         this.g = null;
@@ -37,7 +37,7 @@ public class UI extends JPanel {
             }
         };
         
-        timer.schedule(task, 0L, 15L);
+        timer.schedule(task, 0L, 10L);
     }
     
     public Carro[] getCarros() {

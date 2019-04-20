@@ -1,4 +1,4 @@
-package simulacao;
+package simulacaocruzamento;
 
 import java.util.Timer;
 import java.util.TimerTask;
