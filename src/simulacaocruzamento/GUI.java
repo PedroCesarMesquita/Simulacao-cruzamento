@@ -127,7 +127,7 @@ public class GUI extends JPanel {
             w = Semaforo.COMPRIMENTO;
             h = Semaforo.LARGURA;
         }
-        g.setColor(semaforo.getEstado() ? Color.green : Color.red);
+        g.setColor(semaforo.getCor());
         g.fillRect(x, y, w, h);
         g.setColor(Color.black);
         g.drawRect(x, y, w, h);
