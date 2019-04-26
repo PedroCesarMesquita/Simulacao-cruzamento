@@ -58,7 +58,7 @@ public class Carro {
             }
         };
         
-        timer.schedule(task, 0L, 10L);
+        timer.schedule(task, 0L, 8L);
     }
     
     public static Semaforo[] getSemaforos() {
@@ -72,7 +72,7 @@ public class Carro {
     public static Color getCorAleatoria() {
         Color[] cores = {
             Color.white, Color.cyan, Color.blue, Color.gray, Color.yellow,
-            Color.pink, Color.red, Color.green
+            Color.pink, Color.magenta, Color.red, Color.green
         };
         return cores[(int) (Math.random() * cores.length)];
     }
@@ -136,8 +136,8 @@ public class Carro {
     
     public void atualiza() {
         if(verificaSemaforo()) {
-            velocidadeX = (int)  Math.cos((double) sentido * Math.PI / 2.0) * 2;
-            velocidadeY = (int) -Math.sin((double) sentido * Math.PI / 2.0) * 2;
+            velocidadeX = (int)  Math.cos((double) sentido * Math.PI / 2.0);
+            velocidadeY = (int) -Math.sin((double) sentido * Math.PI / 2.0);
             if(virar && x >= 375 && x <= 425 && y >= 375 && y <= 425) {
                 sentido = (sentido + 3) % 4;
                 x += (int)  Math.cos((double) sentido * Math.PI / 2.0) * (COMPRIMENTO - LARGURA);
@@ -154,7 +154,7 @@ public class Carro {
     }
 
     public boolean verificaSemaforo() {
-        if(semaforos[sentido].getEstado() == Semaforo.FECHADO) {
+        if(semaforos[sentido].getCor() == Color.red || semaforos[sentido].getCor() == Color.yellow) {
             if(sentido == SENTIDO_DIREITA)
                 return (x >= semaforos[sentido].getX() - COMPRIMENTO / 2) || (x < semaforos[sentido].getX() - (int) (((double) semaforos[sentido].getCarrosParados() * 1.25) * COMPRIMENTO + COMPRIMENTO));
             if(sentido == SENTIDO_CIMA)
