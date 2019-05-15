@@ -1,3 +1,20 @@
+/*
+    Copyright (C) 2019 PedroCesarMesquita
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 package simulacaocruzamento;
 
 import java.awt.Color;
@@ -6,24 +23,48 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JPanel;
 
+/**
+ * Inferface gráfica.
+ * @author PedroCesarMesquita
+ */
 public class GUI extends JPanel {
     private Carro[] carros;
     private Semaforo[] semaforos;
     private Graphics g;
     
+    /**
+     * Construtor sem parâmetros.
+     * Inicializa vetores de carros e semáforos como null.
+     */
     public GUI() {
         this(null, null);
     }
     
+    /**
+     * Construtor com definição de carros.
+     * Inicializa vetor de semáforos como null.
+     * @param carros    carros a serem desenhados
+     */
     public GUI(Carro[] carros) {
         this(carros, null);
     }
     
+    /**
+     * Construtor com definição de semáforos.
+     * Inicializa vetor de carros como null.
+     * @param semaforos semáforos a serem desenhados
+     */
     public GUI(Semaforo[] semaforos) {
         this(null, semaforos);
     }
     
+    /**
+     * Construtor com definição de carros e semáforos.
+     * @param carros    carros a serem desenhados
+     * @param semaforos semáforos a serem desenhados
+     */
     public GUI(Carro[] carros, Semaforo[] semaforos) {
+        super();
         this.carros = carros;
         this.semaforos = semaforos;
         this.g = null;
@@ -40,27 +81,45 @@ public class GUI extends JPanel {
         timer.schedule(task, 0L, 10L);
     }
     
+    /**
+     * Retorna o vetor de carros a serem desenhados.
+     * @return  vetor de carros a serem desenhados
+     */
     public Carro[] getCarros() {
         return this.carros;
     }
     
+    /**
+     * Define o vetor de carros a serem desenhados.
+     * @param carros    vetor de carros a serem desenhados
+     */
     public void setCarros(Carro[] carros) {
         this.carros = carros;
     }
     
+    /**
+     * Retorna o vetor de semáforos a serem desenhados.
+     * @return  vetor de semáforos a serem desenhados
+     */
     public Semaforo[] getSemaforos() {
         return this.semaforos;
     }
     
+    /**
+     * Define o vetor de semáforos a serem desenhados.
+     * @param semaforos vetor de semáforos a serem desenhados
+     */
     public void setSemaforos(Semaforo[] semaforos) {
         this.semaforos = semaforos;
     }
     
+    /**
+     * Desenha ruas, carros e semáforos no JPanel.
+     * @param graphics  gráficos
+     */
     @Override
-    public void paintComponent(Graphics graphics) {
-        g = graphics;
-        
-        super.paintComponent(g);
+    public void paintComponent(Graphics graphics) {        
+        super.paintComponent(g = graphics);
         
         g.setClip(0, 0, 800, 800);
 
@@ -100,20 +159,29 @@ public class GUI extends JPanel {
         }
     }
     
+    /**
+     * Desenha um carro.
+     * @param carro carro a ser desenhado
+     */
     public void desenhaCarro(Carro carro) {
+        int comprimento = carro.getComprimento(), largura = carro.getLargura();
         if(carro.getSentido() % 2 == 0) {
             g.setColor(carro.getCor());
-            g.fillRect(carro.getX() - Carro.COMPRIMENTO / 2, carro.getY() - Carro.LARGURA / 2, Carro.COMPRIMENTO, Carro.LARGURA);
+            g.fillRect(carro.getX() - comprimento / 2, carro.getY() - largura / 2, comprimento, largura);
             g.setColor(Color.black);
-            g.drawRect(carro.getX() - Carro.COMPRIMENTO / 2, carro.getY() - Carro.LARGURA / 2, Carro.COMPRIMENTO, Carro.LARGURA);
+            g.drawRect(carro.getX() - comprimento / 2, carro.getY() - largura / 2, comprimento, largura);
         } else {
             g.setColor(carro.getCor());
-            g.fillRect(carro.getX() - Carro.LARGURA / 2, carro.getY() - Carro.COMPRIMENTO / 2, Carro.LARGURA, Carro.COMPRIMENTO);
+            g.fillRect(carro.getX() - largura / 2, carro.getY() - comprimento / 2, largura, comprimento);
             g.setColor(Color.black);
-            g.drawRect(carro.getX() - Carro.LARGURA / 2, carro.getY() - Carro.COMPRIMENTO / 2, Carro.LARGURA, Carro.COMPRIMENTO);
+            g.drawRect(carro.getX() - largura / 2, carro.getY() - comprimento / 2, largura, comprimento);
         }
     }
     
+    /**
+     * Desenha um semáforo.
+     * @param semaforo  semáforo a ser desenhado
+     */
     public void desenhaSemaforo(Semaforo semaforo) {
         int x, y, w, h;
         if(semaforo.getSentido() % 2 == 0) {
